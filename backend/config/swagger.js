@@ -10,7 +10,7 @@ const options = {
         },
         servers: [
             {
-                url: 'https://backwbd.vercel.app',
+                url: 'https://fina-wbd-xkzw.vercel.app',
                 description: 'Development server',
             },
         ],
