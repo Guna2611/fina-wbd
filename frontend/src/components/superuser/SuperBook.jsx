@@ -105,7 +105,7 @@ const AddBook = () => {
             value={formData.Released} 
             onChange={handleChange} 
             required 
-            min={today}
+            max={today}
           />
 
           <label htmlFor="Author">Author:</label>

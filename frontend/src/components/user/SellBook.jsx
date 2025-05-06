@@ -126,7 +126,7 @@ const SellBook = () => {
                     name={key}
                     value={formData[key]}
                     onChange={handleChange}
-                    min={key === "Released" ? getTodayDate() : undefined} // Add min for Released
+                    max={key === "Released" ? getTodayDate() : undefined} // Add min for Released
                   />
                 )}
                 {errors[key] && <span className="error-message">{errors[key]}</span>}
