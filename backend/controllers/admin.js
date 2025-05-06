@@ -2,6 +2,7 @@ const userModel4 = require("../Models/bookspage.js");
 const userModel3 = require("../Models/userDetail");
 const sellmodel = require("../Models/sellbook.js");
 const adminmodel = require("../Models/adminmodel.js");
+const {bookmodel} = require("../Models/bookcollection.js");
 const path = require("path");
 const mongoose = require('mongoose');
 
@@ -59,6 +60,49 @@ class AdminController {
       }
     });
   }
+
+  async addBookToUserCollection(req, res) {
+    try {
+      // Extract book details from request body
+      const {
+        Title, Author, Price, Publication, 
+        Language, ImageUrl, ISBN_10, ISBN_13, 
+        Genre, MRP, Discount, count
+      } = req.body;
+
+      // Create a new book in the book collection
+      const newBook = new bookmodel({
+        Title,
+        Author,
+        Price,
+        Publication,
+        Language,
+        ImageUrl,
+        ISBN_10,
+        ISBN_13,
+        Genre,
+        MRP,
+        Discount,
+        count: count || 1
+      });
+
+      // Save the book
+      const savedBook = await newBook.save();
+
+      // Respond with success message
+      res.status(201).json({
+        message: 'Book added successfully',
+        book: savedBook
+      });
+    } catch (error) {
+      console.error('Error adding book:', error);
+      res.status(500).json({
+        message: 'Failed to add book',
+        error: error.message
+      });
+    }
+  }
+
 
   async BookAdmin(req, res) {
     try {
